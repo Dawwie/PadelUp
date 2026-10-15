@@ -13,8 +13,8 @@
 ## Kroki
 
 1. ~~Logika historii przez TDD~~: **zrobione**. `source/MatchHistory.mc` (`add(list, match, date, duration)`), `ScoreText.durationText(seconds)` i 4 testy w `MatchScoreTest.mc` (30/30 zielone). Jeszcze nie zacommitowane.
-2. **Czas meczu w `Recorder`:** zapamiętanie `timerTime` na starcie i w `newMatch`. Metoda zwraca czas meczu w sekundach. Weryfikacja: symulator.
-3. **Zapis do historii:** w `NewMatchConfirmDelegate` (przed `reset`) i przy `:save` w `PauseMenuDelegate`: `MatchHistory.add(Storage.getValue("matches"), match, Time.now().value(), czas)`, potem zapis do Storage. Weryfikacja: kilka meczów w symulatorze, potem restart i sprawdzenie, że historia przetrwała.
+2. ~~Czas meczu w `Recorder`~~: **zrobione**. `_matchStart` ustawiany po `_session.start()` i na początku `newMatch`; `matchDuration()` zwraca sekundy. Build na oba zegarki i testy 30/30 zielone. Wartości jeszcze nikt nie wyświetla, sprawdzenie w symulatorze razem z krokiem 3. Uwaga: `matchDuration()` czytać **przed** `_recorder.newMatch()`, bo ten zeruje start.
+3. ~~Zapis do historii~~: **zrobione**. `storeMatch(match, recorder)` w `ScoreDelegate.mc`, klucz `MATCHES_KEY = "matches"`, wołane w `NewMatchConfirmDelegate` (przed `_recorder.newMatch`) i przy `:save`. Test `historySurvivesStorage` (31/31). W symulatorze: Nowy mecz + Zapisz, restart, Zapisz: lista miała 2 mecze, najnowszy pierwszy.
 4. **Ekrany:** podsumowanie po „Zapisz” i „Historia” w menu pauzy (nowe stringi w `resources/strings/strings.xml`). Weryfikacja: użytkownik klika w symulatorze.
 5. **Tętno i czas na ekranie** według werdyktu powyżej. `ScoreView` przechodzi z odświeżania co minutę na co 1 s. Sprawdzić, czy linia nie koliduje ze statusem („TIE-BREAK DO 10”) ani z Americano.
 6. **Domknięcie:** CLAUDE.md (Behavior, Storage, Known limits), buildy release na oba zegarki, `/code-review`, test baterii w prawdziwym meczu.

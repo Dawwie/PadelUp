@@ -6,6 +6,8 @@ import Toybox.WatchUi;
 // An unfinished match (app crashed or was killed) is restored from storage; the recording starts anew.
 const HISTORY_KEY = "history";
 const CONFIG_KEY = "config";
+// Finished matches, see MatchHistory.mc
+const MATCHES_KEY = "matches";
 
 class PadelApp extends Application.AppBase {
 

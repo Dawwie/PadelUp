@@ -26,6 +26,8 @@ class Recorder {
     private var _previousScores as String = "";
     private var _previousSets as Array<Number> = [0, 0] as Array<Number>;
     private var _previousPoints as Array<Number> = [0, 0] as Array<Number>;
+    // Timer time (ms) when the current match started; after a crash it is the restore time
+    private var _matchStart as Number = 0;
 
     // match: the restored match, so its finished sets do not add laps to this session
     function initialize(match as MatchScore.Match) {
@@ -49,6 +51,7 @@ class Recorder {
         _lapStartPoints = MatchScore.pointsWon(match.getHistory());
         update(match);
         _session.start();
+        _matchStart = timerTime();
     }
 
     function isRecording() as Boolean {
@@ -100,6 +103,7 @@ class Recorder {
 
     // Call before match.reset(): closes the current match's lap and adds it to the session totals
     function newMatch(match as MatchScore.Match) as Void {
+        _matchStart = timerTime();
         var state = match.getState();
         var points = MatchScore.pointsWon(match.getHistory());
         if (match.getHistory().size() == 0) {
@@ -111,6 +115,20 @@ class Recorder {
         _previousPoints = [_previousPoints[0] + points[0], _previousPoints[1] + points[1]] as Array<Number>;
         _setsFinished = 0;
         _lapStartPoints = [0, 0] as Array<Number>;
+    }
+
+    // Time of the current match in seconds, without pauses
+    function matchDuration() as Number {
+        return (timerTime() - _matchStart) / 1000;
+    }
+
+    // Activity timer in ms; it does not count pauses
+    private function timerTime() as Number {
+        var info = Activity.getActivityInfo();
+        if (info == null || info.timerTime == null) {
+            return 0;
+        }
+        return info.timerTime as Number;
     }
 
     private function max(a as Number, b as Number) as Number {

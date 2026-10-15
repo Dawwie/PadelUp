@@ -2,6 +2,7 @@ import Toybox.Application;
 import Toybox.Attention;
 import Toybox.Lang;
 import Toybox.System;
+import Toybox.Time;
 import Toybox.WatchUi;
 
 // UP = point for us, DOWN = point for them, BACK = undo, START = pause menu, long UP = settings.
@@ -98,6 +99,7 @@ class PauseMenuDelegate extends WatchUi.Menu2InputDelegate {
             var confirm = new WatchUi.Confirmation(WatchUi.loadResource(Rez.Strings.ConfirmNewMatch) as String);
             WatchUi.pushView(confirm, new NewMatchConfirmDelegate(_match, _recorder), WatchUi.SLIDE_IMMEDIATE);
         } else if (id == :save) {
+            storeMatch(_match, _recorder);
             _recorder.save();
             Application.Storage.deleteValue(HISTORY_KEY);
             System.exit();
@@ -144,6 +146,7 @@ class NewMatchConfirmDelegate extends WatchUi.ConfirmationDelegate {
 
     function onResponse(response as WatchUi.Confirm) as Boolean {
         if (response == WatchUi.CONFIRM_YES) {
+            storeMatch(_match, _recorder);
             _recorder.newMatch(_match);
             _match.reset();
             Application.Storage.setValue(HISTORY_KEY, _match.getHistory());
@@ -154,4 +157,10 @@ class NewMatchConfirmDelegate extends WatchUi.ConfirmationDelegate {
         }
         return true;
     }
+}
+
+// Adds the match to the finished matches in storage. Call before recorder.newMatch(), which restarts the match time.
+function storeMatch(match as MatchScore.Match, recorder as Recorder) as Void {
+    var list = Application.Storage.getValue(MATCHES_KEY) as Array<Dictionary>?;
+    Application.Storage.setValue(MATCHES_KEY, MatchHistory.add(list, match, Time.now().value(), recorder.matchDuration()));
 }

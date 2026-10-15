@@ -1,3 +1,4 @@
+import Toybox.Application;
 import Toybox.Lang;
 import Toybox.Test;
 
@@ -392,6 +393,21 @@ function historyKeepsTheNewest20Matches(logger as Logger) as Boolean {
     Test.assertEqual(list.size(), 20);
     Test.assertEqual(list[0]["date"], 21);
     Test.assertEqual(list[19]["date"], 2);
+    return true;
+}
+
+// Own key, so the test does not touch the matches stored by the app in the simulator
+(:test)
+function historySurvivesStorage(logger as Logger) as Boolean {
+    var m = newMatch(MatchScore.GAME_ADVANTAGE);
+    points(m, 0, 1);
+    Application.Storage.setValue("test_matches", MatchHistory.add(null, m, 1792000000, 60));
+    var list = Application.Storage.getValue("test_matches") as Array<Dictionary>;
+    Application.Storage.deleteValue("test_matches");
+    list = MatchHistory.add(list, m, 1792000100, 90);
+    Test.assertEqual(list.size(), 2);
+    Test.assertEqual(list[1]["date"], 1792000000);
+    Test.assertEqual(list[1]["points"].toString(), "[1, 0]");
     return true;
 }
 
