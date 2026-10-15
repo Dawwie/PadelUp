@@ -6,6 +6,10 @@
     <string id="MenuNewMatch">Nowy mecz</string>
     <string id="MenuSave">Zapisz</string>
     <string id="MenuDiscard">Odrzuć</string>
+    <string id="MenuHistory">Historia</string>
+    <string id="HistoryEmpty">Brak meczów</string>
+    <string id="SummaryTime">Czas</string>
+    <string id="SummaryPoints">Punkty</string>
     <string id="ConfirmDiscard">Odrzucić aktywność?</string>
     <string id="ConfirmNewMatch">Zakończyć mecz i zacząć nowy?</string>
 

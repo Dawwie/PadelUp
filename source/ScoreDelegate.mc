@@ -76,6 +76,7 @@ class ScoreDelegate extends WatchUi.BehaviorDelegate {
         menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.MenuNewMatch) as String, null, :newMatch, null));
         menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.MenuSave) as String, null, :save, null));
         menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.MenuDiscard) as String, null, :discard, null));
+        menu.addItem(new WatchUi.MenuItem(WatchUi.loadResource(Rez.Strings.MenuHistory) as String, null, :history, null));
         WatchUi.pushView(menu, new PauseMenuDelegate(_match, _recorder), WatchUi.SLIDE_UP);
     }
 }
@@ -99,13 +100,18 @@ class PauseMenuDelegate extends WatchUi.Menu2InputDelegate {
             var confirm = new WatchUi.Confirmation(WatchUi.loadResource(Rez.Strings.ConfirmNewMatch) as String);
             WatchUi.pushView(confirm, new NewMatchConfirmDelegate(_match, _recorder), WatchUi.SLIDE_IMMEDIATE);
         } else if (id == :save) {
-            storeMatch(_match, _recorder);
+            var entry = storeMatch(_match, _recorder);
             _recorder.save();
             Application.Storage.deleteValue(HISTORY_KEY);
-            System.exit();
+            if (entry == null) {
+                System.exit();
+            }
+            WatchUi.switchToView(new SummaryView(entry), new SummaryDelegate(true), WatchUi.SLIDE_UP);
         } else if (id == :discard) {
             var confirm = new WatchUi.Confirmation(WatchUi.loadResource(Rez.Strings.ConfirmDiscard) as String);
             WatchUi.pushView(confirm, new DiscardConfirmDelegate(_recorder), WatchUi.SLIDE_IMMEDIATE);
+        } else if (id == :history) {
+            HistoryMenu.open();
         }
     }
 
@@ -160,7 +166,10 @@ class NewMatchConfirmDelegate extends WatchUi.ConfirmationDelegate {
 }
 
 // Adds the match to the finished matches in storage. Call before recorder.newMatch(), which restarts the match time.
-function storeMatch(match as MatchScore.Match, recorder as Recorder) as Void {
+// Returns the new entry, or null for a match without points (not stored).
+function storeMatch(match as MatchScore.Match, recorder as Recorder) as Dictionary? {
     var list = Application.Storage.getValue(MATCHES_KEY) as Array<Dictionary>?;
-    Application.Storage.setValue(MATCHES_KEY, MatchHistory.add(list, match, Time.now().value(), recorder.matchDuration()));
+    list = MatchHistory.add(list, match, Time.now().value(), recorder.matchDuration());
+    Application.Storage.setValue(MATCHES_KEY, list);
+    return match.getHistory().size() > 0 ? list[0] : null;
 }
