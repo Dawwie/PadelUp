@@ -1,0 +1,14 @@
+<resources>
+    <fitContributions>
+        <fitField id="0" displayInChart="true" sortOrder="0" precision="0" chartTitle="@Strings.FitPointDiffChart" dataLabel="@Strings.FitPointDiff" unitLabel="@Strings.FitPointsUnit" fillColor="#FFCC00"/>
+        <fitField id="1" displayInActivityLaps="true" sortOrder="1" precision="0" dataLabel="@Strings.FitGamesUs" unitLabel="@Strings.FitGamesUnit"/>
+        <fitField id="2" displayInActivityLaps="true" sortOrder="2" precision="0" dataLabel="@Strings.FitGamesThem" unitLabel="@Strings.FitGamesUnit"/>
+        <fitField id="8" displayInActivityLaps="true" sortOrder="8" precision="0" dataLabel="@Strings.FitLapPointsUs" unitLabel="@Strings.FitPointsUnit"/>
+        <fitField id="9" displayInActivityLaps="true" sortOrder="9" precision="0" dataLabel="@Strings.FitLapPointsThem" unitLabel="@Strings.FitPointsUnit"/>
+        <fitField id="7" displayInActivitySummary="true" sortOrder="3" dataLabel="@Strings.FitFinalScore" unitLabel="@Strings.FitEmpty"/>
+        <fitField id="3" displayInActivitySummary="true" sortOrder="4" precision="0" dataLabel="@Strings.FitSetsUs" unitLabel="@Strings.FitSetsUnit"/>
+        <fitField id="4" displayInActivitySummary="true" sortOrder="5" precision="0" dataLabel="@Strings.FitSetsThem" unitLabel="@Strings.FitSetsUnit"/>
+        <fitField id="5" displayInActivitySummary="true" sortOrder="6" precision="0" dataLabel="@Strings.FitPointsUs" unitLabel="@Strings.FitPointsUnit"/>
+        <fitField id="6" displayInActivitySummary="true" sortOrder="7" precision="0" dataLabel="@Strings.FitPointsThem" unitLabel="@Strings.FitPointsUnit"/>
+    </fitContributions>
+</resources>

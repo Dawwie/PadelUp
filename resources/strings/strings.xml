@@ -1,0 +1,43 @@
+<resources>
+    <string id="AppName">Padel Score</string>
+
+    <string id="MenuTitle">Pauza</string>
+    <string id="MenuResume">Wznów</string>
+    <string id="MenuNewMatch">Nowy mecz</string>
+    <string id="MenuSave">Zapisz</string>
+    <string id="MenuDiscard">Odrzuć</string>
+    <string id="ConfirmDiscard">Odrzucić aktywność?</string>
+    <string id="ConfirmNewMatch">Zakończyć mecz i zacząć nowy?</string>
+
+    <string id="SettingsTitle">Ustawienia</string>
+    <string id="SettingFormat">Format</string>
+    <string id="SettingGameMode">Gem</string>
+    <string id="SettingGamesPerSet">Set</string>
+    <string id="SettingDecider">Decydujący set</string>
+    <string id="SettingAmericanoTotal">Americano do</string>
+    <string id="FormatClassic">Klasyczny</string>
+    <string id="FormatAmericano">Americano</string>
+    <string id="GameAdvantage">Przewaga</string>
+    <string id="GameStarPoint">Star point</string>
+    <string id="GameGoldenPoint">Golden point</string>
+    <string id="Set6Games">Do 6 gemów</string>
+    <string id="Set4Games">Do 4 gemów</string>
+    <string id="DeciderFullSet">Pełny set</string>
+    <string id="DeciderTiebreak">Tie-break do</string>
+
+    <string id="FitPointDiffChart">Przebieg meczu</string>
+    <string id="FitPointDiff">Różnica punktów</string>
+    <string id="FitPointsUnit">pkt</string>
+    <string id="FitGamesUs">Gemy my</string>
+    <string id="FitGamesThem">Gemy oni</string>
+    <string id="FitGamesUnit">gem</string>
+    <string id="FitFinalScore">Wynik</string>
+    <string id="FitEmpty"> </string>
+    <string id="FitLapPointsUs">Punkty my</string>
+    <string id="FitLapPointsThem">Punkty oni</string>
+    <string id="FitSetsUs">Sety my</string>
+    <string id="FitSetsThem">Sety oni</string>
+    <string id="FitSetsUnit">set</string>
+    <string id="FitPointsUs">Punkty my</string>
+    <string id="FitPointsThem">Punkty oni</string>
+</resources>

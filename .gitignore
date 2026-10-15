@@ -1,0 +1,10 @@
+# Signing key: private, never commit
+*.der
+
+# Build output (prg, debug xml, generated sources)
+bin/
+*.prg
+*.iq
+
+# macOS
+.DS_Store
