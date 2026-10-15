@@ -18,13 +18,27 @@ module MatchHistory {
         }
         var entry = {
             "date" => date,
-            "score" => ScoreText.finalScore(match.getConfig(), match.getState()),
+            "score" => score(match),
             "duration" => duration,
             "points" => MatchScore.pointsWon(match.getHistory()),
             "format" => match.getConfig().format as Number
         };
         list = [entry].addAll(list) as Array<Dictionary>;
         return list.size() > MAX_MATCHES ? list.slice(0, MAX_MATCHES) : list;
+    }
+
+    // finalScore, plus a started set that is still 0-0 in games: "0-0", or its points in a deciding tie-break
+    function score(match as MatchScore.Match) as String {
+        var config = match.getConfig();
+        var state = match.getState();
+        var text = ScoreText.finalScore(config, state);
+        var started = state.points[0] > 0 || state.points[1] > 0;
+        if (config.format == MatchScore.FORMAT_AMERICANO || state.winner != MatchScore.NO_WINNER
+                || state.games[0] > 0 || state.games[1] > 0 || !started) {
+            return text;
+        }
+        var current = state.inTiebreak ? state.points[0] + "-" + state.points[1] : "0-0";
+        return text + (text.length() > 0 ? " " : "") + current;
     }
 
     // "6-4 3-6 7-6" -> ["6-4", "3-6", "7-6"]; an Americano score is one item

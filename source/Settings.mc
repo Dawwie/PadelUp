@@ -9,7 +9,7 @@ module Settings {
     const FORMATS = [MatchScore.FORMAT_CLASSIC, MatchScore.FORMAT_AMERICANO] as Array<Number>;
     const GAME_MODES = [MatchScore.GAME_ADVANTAGE, MatchScore.GAME_STAR_POINT, MatchScore.GAME_GOLDEN_POINT] as Array<Number>;
     const GAMES_PER_SET = [6, 4] as Array<Number>;
-    const DECIDER_TIEBREAK = [7, 10, 0] as Array<Number>;
+    const DECIDER_TIEBREAK = [0, 7, 10] as Array<Number>;
     const AMERICANO_TOTALS = [16, 21, 24, 32] as Array<Number>;
 
     // The value after current, or the first one when current is not in the list

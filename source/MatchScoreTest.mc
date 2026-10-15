@@ -373,6 +373,33 @@ function historyEntryKeepsScorePointsDateAndDuration(logger as Logger) as Boolea
     return true;
 }
 
+// finalScore leaves out a set at 0-0 in games; the history keeps it once a point is played
+(:test)
+function historyKeepsStartedSetWithoutGames(logger as Logger) as Boolean {
+    var m = newMatch(MatchScore.GAME_ADVANTAGE);
+    points(m, 0, 1);
+    var list = MatchHistory.add(null, m, 1, 60);
+    Test.assertEqual(list[0]["score"], "0-0");
+    points(m, 0, 23);
+    points(m, 1, 1);
+    list = MatchHistory.add(null, m, 1, 60);
+    Test.assertEqual(list[0]["score"], "6-0 0-0");
+    return true;
+}
+
+(:test)
+function historyShowsDecidingTiebreakPoints(logger as Logger) as Boolean {
+    var m = newMatch(MatchScore.GAME_GOLDEN_POINT);
+    m.getConfig().deciderTiebreakTo = 10;
+    points(m, 0, 24);
+    points(m, 1, 24);
+    points(m, 0, 5);
+    points(m, 1, 3);
+    var list = MatchHistory.add(null, m, 1, 60);
+    Test.assertEqual(list[0]["score"], "6-0 0-6 5-3");
+    return true;
+}
+
 (:test)
 function historySplitsScoreIntoSets(logger as Logger) as Boolean {
     Test.assertEqual(MatchHistory.sets("6-4 3-6 7-6").toString(), "[6-4, 3-6, 7-6]");
