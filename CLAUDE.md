@@ -47,7 +47,7 @@ The agent cannot screenshot or click the simulator; the user checks the UI by cl
 - Nowy mecz: score back to zero in the same session (for Americano tournaments), the finished match stays in the laps and the session summary.
 - Recording starts when the app opens.
 - Vibration: short per point, long when the point ends a set or the match.
-- Settings: format (Klasyczny / Americano), game (Przewaga / Star point / Golden point), set (6 / 4 games), deciding set (tie-break to 7 by default / tie-break to 10 / full set), Americano total (16 / 21 / 24 / 32, default 21). Sets to win is fixed at 2. Changes apply to the match in progress and are kept for the next matches.
+- Settings: format (Klasyczny / Americano), game (Przewaga / Star point / Golden point), set (6 / 4 games), deciding set (full set by default / tie-break to 7 / tie-break to 10), Americano total (16 / 21 / 24 / 32, default 21). Sets to win is fixed at 2. Changes apply to the match in progress and are kept for the next matches.
 
 ## Storage and FIT
 

@@ -24,16 +24,24 @@ class SummaryView extends WatchUi.View {
         dc.clear();
 
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(w / 2, h * 0.20, Graphics.FONT_XTINY, SummaryText.date(_entry["date"] as Number), center);
+        dc.drawText(w / 2, h * 0.17, Graphics.FONT_XTINY, SummaryText.date(_entry["date"] as Number), center);
 
-        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(w / 2, h * 0.40, Graphics.FONT_MEDIUM, _entry["score"] as String, center);
+        // One column per set: its number above the score
+        var format = SummaryText.format(_entry);
+        var sets = MatchHistory.sets(_entry["score"] as String);
+        for (var i = 0; i < sets.size(); i++) {
+            var x = w * (i + 1) / (sets.size() + 1);
+            dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(x, h * 0.30, Graphics.FONT_XTINY, MatchHistory.setHeading(format, i), center);
+            dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+            dc.drawText(x, h * 0.41, Graphics.FONT_MEDIUM, sets[i], center);
+        }
 
-        dc.drawText(w / 2, h * 0.60, Graphics.FONT_SMALL,
+        dc.drawText(w / 2, h * 0.63, Graphics.FONT_SMALL,
             WatchUi.loadResource(Rez.Strings.SummaryTime) + " " + ScoreText.durationText(_entry["duration"] as Number), center);
 
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(w / 2, h * 0.76, Graphics.FONT_SMALL,
+        dc.drawText(w / 2, h * 0.77, Graphics.FONT_SMALL,
             WatchUi.loadResource(Rez.Strings.SummaryPoints) + " " + points[0] + " : " + points[1], center);
     }
 }
@@ -63,6 +71,12 @@ module SummaryText {
         return info.day + "." + (info.month as Number).format("%02d") + " "
             + ScoreText.clockText(info.hour, info.min, System.getDeviceSettings().is24Hour);
     }
+
+    // Entries stored before the format was saved count as classic
+    function format(entry as Dictionary) as Number {
+        var format = entry["format"] as Number?;
+        return format != null ? format : MatchScore.FORMAT_CLASSIC as Number;
+    }
 }
 
 // Pause menu > Historia: finished matches, newest first; select opens the summary.
@@ -76,7 +90,7 @@ module HistoryMenu {
         }
         for (var i = 0; i < list.size(); i++) {
             var entry = list[i];
-            menu.addItem(new WatchUi.MenuItem(entry["score"] as String,
+            menu.addItem(new WatchUi.MenuItem(MatchHistory.label(SummaryText.format(entry), entry["score"] as String),
                 SummaryText.date(entry["date"] as Number) + "  " + ScoreText.durationText(entry["duration"] as Number), i, null));
         }
         WatchUi.pushView(menu, new HistoryMenuDelegate(list), WatchUi.SLIDE_LEFT);

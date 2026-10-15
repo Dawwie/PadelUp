@@ -339,12 +339,12 @@ function nextValueCyclesAndFallsBackToFirst(logger as Logger) as Boolean {
 }
 
 (:test)
-function deciderDefaultsToTiebreakTo7(logger as Logger) as Boolean {
+function deciderDefaultsToFullSet(logger as Logger) as Boolean {
     var m = newMatch(MatchScore.GAME_GOLDEN_POINT);
     points(m, 0, 24);
     points(m, 1, 24);
-    Test.assertEqual(m.getState().inTiebreak, true);
-    Test.assertEqual(m.getState().tiebreakTo, 7);
+    Test.assertEqual(m.getState().inTiebreak, false);
+    expectPair(m.getState().games, 0, 0, "deciding set starts at 0:0");
     return true;
 }
 
@@ -372,6 +372,21 @@ function historyEntryKeepsScorePointsDateAndDuration(logger as Logger) as Boolea
     Test.assertEqual(entry["points"].toString(), "[24, 8]");
     Test.assertEqual(entry["date"], 1792000000);
     Test.assertEqual(entry["duration"], 2825);
+    Test.assertEqual(entry["format"], MatchScore.FORMAT_CLASSIC);
+    return true;
+}
+
+(:test)
+function historySplitsScoreIntoSets(logger as Logger) as Boolean {
+    Test.assertEqual(MatchHistory.sets("6-4 3-6 7-6").toString(), "[6-4, 3-6, 7-6]");
+    Test.assertEqual(MatchHistory.sets("21-15").toString(), "[21-15]");
+    return true;
+}
+
+(:test)
+function historyLabelNumbersSetsOrMarksPoints(logger as Logger) as Boolean {
+    Test.assertEqual(MatchHistory.label(MatchScore.FORMAT_CLASSIC, "6-0 2-1"), "I 6-0  II 2-1");
+    Test.assertEqual(MatchHistory.label(MatchScore.FORMAT_AMERICANO, "21-15"), "PKT 21-15");
     return true;
 }
 

@@ -25,7 +25,7 @@ module MatchScore {
         var gamesPerSet as Number = 6;  // 6 = regular set, 4 = mini-set
         var setsToWin as Number = 2;
         // 0 = the deciding set is a regular set; 7 or 10 = it is replaced by a tie-break to that many points
-        var deciderTiebreakTo as Number = 7;
+        var deciderTiebreakTo as Number = 0;
         var americanoTotal as Number = 21;
 
         function initialize() {
