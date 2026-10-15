@@ -97,6 +97,15 @@ module ScoreText {
         return hour + ":" + min.format("%02d");
     }
 
+    // Match time: "47:05", or "1:12:30" from an hour on
+    function durationText(seconds as Number) as String {
+        var text = (seconds % 60).format("%02d");
+        if (seconds < 3600) {
+            return seconds / 60 + ":" + text;
+        }
+        return seconds / 3600 + ":" + (seconds / 60 % 60).format("%02d") + ":" + text;
+    }
+
     // Finished sets, e.g. "6-4  3-6"
     function setsText(state as MatchScore.MatchState) as String {
         var text = "";

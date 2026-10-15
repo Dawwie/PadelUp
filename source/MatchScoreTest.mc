@@ -358,3 +358,47 @@ function resetStartsANewMatchWithTheSameConfig(logger as Logger) as Boolean {
     Test.assertEqual(m.getConfig().gameMode, MatchScore.GAME_STAR_POINT);
     return true;
 }
+
+(:test)
+function historyEntryKeepsScorePointsDateAndDuration(logger as Logger) as Boolean {
+    var m = newMatch(MatchScore.GAME_GOLDEN_POINT);
+    points(m, 0, 24);
+    points(m, 1, 8);
+    var list = MatchHistory.add(null, m, 1792000000, 2825);
+    Test.assertEqual(list.size(), 1);
+    var entry = list[0];
+    Test.assertEqual(entry["score"], "6-0 0-2");
+    Test.assertEqual(entry["points"].toString(), "[24, 8]");
+    Test.assertEqual(entry["date"], 1792000000);
+    Test.assertEqual(entry["duration"], 2825);
+    return true;
+}
+
+(:test)
+function historySkipsMatchWithoutPoints(logger as Logger) as Boolean {
+    var list = MatchHistory.add(null, newMatch(MatchScore.GAME_ADVANTAGE), 1792000000, 60);
+    Test.assertEqual(list.size(), 0);
+    return true;
+}
+
+(:test)
+function historyKeepsTheNewest20Matches(logger as Logger) as Boolean {
+    var m = newMatch(MatchScore.GAME_ADVANTAGE);
+    points(m, 0, 1);
+    var list = null;
+    for (var date = 1; date <= 21; date++) {
+        list = MatchHistory.add(list, m, date, 60);
+    }
+    Test.assertEqual(list.size(), 20);
+    Test.assertEqual(list[0]["date"], 21);
+    Test.assertEqual(list[19]["date"], 2);
+    return true;
+}
+
+(:test)
+function durationTextShowsHoursOnlyWhenNeeded(logger as Logger) as Boolean {
+    Test.assertEqual(ScoreText.durationText(9), "0:09");
+    Test.assertEqual(ScoreText.durationText(2825), "47:05");
+    Test.assertEqual(ScoreText.durationText(4350), "1:12:30");
+    return true;
+}
