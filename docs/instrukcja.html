@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="pl">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Padel Score – instrukcja</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=Barlow+Semi+Condensed:wght@500;600&display=swap">
+<style>
+/* Layout: one reading column; each section pairs a watch model (left) with its explanation (right), stacking on phones. */
+:root {
+  --bg: #f3f6f9;
+  --surface: #ffffff;
+  --fg: #16202b;
+  --muted: #566474;
+  --line: #d5dde6;
+  --court: #1d5aa6;      /* padel court blue */
+  --ball: #c9d63a;       /* ball yellow-green, used sparingly */
+  --case: #2b3038;
+  --case-hi: #4a515c;
+  --btn: #5b636f;
+  --btn-hot: #c9d63a;
+  --display: "Saira Condensed", "Arial Narrow", sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --screen: "Barlow Semi Condensed", "Arial Narrow", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f151c; --surface: #17202a; --fg: #e6edf4; --muted: #9aa8b7; --line: #2a3644;
+    --court: #6fa3e8; --ball: #d4e04f; --case: #39404a; --case-hi: #5a626e; --btn: #6c7581; --btn-hot: #d4e04f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f151c; --surface: #17202a; --fg: #e6edf4; --muted: #9aa8b7; --line: #2a3644;
+  --court: #6fa3e8; --ball: #d4e04f; --case: #39404a; --case-hi: #5a626e; --btn: #6c7581; --btn-hot: #d4e04f;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 17px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: grid; gap: 56px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.1; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(40px, 7vw, 64px); letter-spacing: .01em; }
+h2 { font-size: 34px; }
+h3 { font-size: 22px; }
+p { margin: 0; max-width: 65ch; }
+.eyebrow { font-family: var(--display); text-transform: uppercase; letter-spacing: .12em; color: var(--court); font-size: 15px; }
+header { display: grid; gap: 12px; }
+header .lead { font-size: 19px; color: var(--muted); }
+.hero svg { width: 100%; height: auto; display: block; }
+.note { font-size: 14px; color: var(--muted); }
+section { display: grid; gap: 20px; }
+.pair { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 32px; align-items: start; }
+.pair > * { min-width: 0; }
+.pair svg { width: 100%; max-width: 340px; height: auto; display: block; margin: 0 auto; }
+.text { display: grid; gap: 14px; }
+@media (max-width: 720px) { .pair { grid-template-columns: 1fr; } }
+.keys { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.key { display: grid; grid-template-columns: 112px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.key > * { min-width: 0; }
+.chip { font-family: var(--display); font-weight: 700; letter-spacing: .08em; font-size: 15px; display: inline-block;
+  padding: 2px 10px; border-radius: 4px; background: var(--case); color: #fff; align-self: start; justify-self: start; }
+.chip.hold { background: var(--court); }
+ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; max-width: 65ch; }
+dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 18px; }
+dt { font-weight: 700; }
+dd { margin: 0; color: var(--muted); min-width: 0; }
+.status { font-family: var(--screen); font-weight: 600; background: #000; color: #ffea00; padding: 1px 8px; border-radius: 3px; font-size: 15px; }
+.callout { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; display: grid; gap: 8px; }
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.gallery figure { margin: 0; display: grid; gap: 8px; }
+.gallery figcaption { font-size: 15px; color: var(--muted); text-align: center; }
+@media (max-width: 560px) { .gallery { grid-template-columns: 1fr; } .key { grid-template-columns: 1fr; gap: 6px; } dl { grid-template-columns: 1fr; } }
+svg text { font-family: var(--screen); }
+.lbl { font-family: var(--display); fill: var(--fg); }
+.lbl-sub { font-family: var(--body); fill: var(--muted); }
+.lead-line { stroke: var(--muted); stroke-width: 2; fill: none; }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Aplikacja na zegarek Garmin · epix Pro / fēnix 9 Pro</span>
+    <h1>Padel Score</h1>
+    <p class="lead">Liczy wynik meczu padla przyciskami zegarka i nagrywa aktywność z tętnem. Wynik meczu, sety i przebieg punktów trafiają do zapisanej aktywności.</p>
+  </header>
+
+  <section class="hero" aria-label="Przyciski zegarka">
+    <div id="hero"></div>
+    <p class="note">Ekrany na tej stronie są odtworzone z kodu aplikacji (układ, kolory, teksty). Menu i potwierdzenia rysuje system zegarka, więc na prawdziwym zegarku mogą wyglądać trochę inaczej.</p>
+  </section>
+
+  <section>
+    <h2>Sterowanie</h2>
+    <div class="keys">
+      <div class="key"><span class="chip">UP</span><span>Punkt dla nas (górna połowa ekranu, <b>MY</b>).</span></div>
+      <div class="key"><span class="chip">DOWN</span><span>Punkt dla nich (dolna połowa, <b>ONI</b>).</span></div>
+      <div class="key"><span class="chip">BACK</span><span>Cofa ostatni punkt. Można cofać wiele razy. Gdy nie ma już czego cofnąć, otwiera menu pauzy, więc aplikacja nigdy nie zamknie się bez pytania.</span></div>
+      <div class="key"><span class="chip">START</span><span>Menu pauzy. Zatrzymuje stoper aktywności.</span></div>
+      <div class="key"><span class="chip hold">UP ⟶ przytrzymaj</span><span>Ustawienia meczu.</span></div>
+      <div class="key"><span class="chip">LIGHT</span><span>Podświetlenie, jak w każdej aplikacji. Padel Score go nie używa.</span></div>
+    </div>
+    <p>Każdy punkt to krótka wibracja. Punkt, który kończy seta albo mecz, daje długą wibrację. Nagrywanie aktywności startuje od razu po otwarciu aplikacji.</p>
+  </section>
+
+  <section>
+    <h2>Ekran wyniku</h2>
+    <div class="pair">
+      <div id="score"></div>
+      <div class="text">
+        <dl>
+          <dt>21:14</dt><dd>Aktualna godzina, zawsze w formacie 24h.</dd>
+          <dt>6-4</dt><dd>Wyniki zakończonych setów.</dd>
+          <dt>MY 3 40</dt><dd>Nasze gemy w secie i punkty w gemie (0, 15, 30, 40, AD). W tie-breaku punkty liczą się 1, 2, 3…</dd>
+          <dt>ONI 3 40</dt><dd>To samo dla rywali.</dd>
+          <dt>152&nbsp;&nbsp;0:47:05</dt><dd>Tętno i czas meczu (godziny:minuty:sekundy, bez pauz). Bez odczytu tętna pokazuje „--”. Czas liczy się od nowa po „Nowy mecz”.</dd>
+          <dt>Linia statusu</dt><dd>Żółty napis, gdy coś jest ważne: <span class="status">GOLDEN POINT</span>, <span class="status">STAR POINT</span>, <span class="status">TIE-BREAK DO 7</span>, <span class="status">WYGRANA: MY</span>.</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Americano</h2>
+    <div class="pair">
+      <div id="americano"></div>
+      <div class="text">
+        <p>W formacie Americano każdy punkt to po prostu +1. Gra toczy się do ustalonej sumy punktów (domyślnie 21), więc ekran pokazuje tylko dwie duże liczby.</p>
+        <p>Na turnieju po każdym meczu wybierz w menu pauzy <b>Nowy mecz</b>. Wynik wraca do zera, a nagrywanie trwa dalej w tej samej aktywności. Każdy mecz zostaje osobnym okrążeniem.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Menu pauzy</h2>
+    <div class="pair">
+      <div id="pause"></div>
+      <div class="text">
+        <p>START (albo BACK, gdy nie ma czego cofnąć) otwiera menu i pauzuje stoper. UP i DOWN przewijają, START wybiera, BACK wraca do meczu.</p>
+        <dl>
+          <dt>Wznów</dt><dd>Powrót do meczu.</dd>
+          <dt>Nowy mecz</dt><dd>Po potwierdzeniu: wynik od zera w tej samej aktywności. Skończony mecz trafia do historii.</dd>
+          <dt>Zapisz</dt><dd>Zapisuje aktywność, pokazuje podsumowanie meczu i zamyka aplikację.</dd>
+          <dt>Odrzuć</dt><dd>Po potwierdzeniu: usuwa aktywność bez zapisu. Mecz nie trafia do historii.</dd>
+          <dt>Historia</dt><dd>Ostatnie 20 meczów zapisanych na zegarku.</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="gallery">
+      <figure><div id="confirm"></div><figcaption>Potwierdzenie „Nowy mecz” (wygląd zależy od zegarka)</figcaption></figure>
+      <figure><div id="settings"></div><figcaption>Ustawienia (przytrzymaj UP)</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ustawienia</h2>
+    <p>Przytrzymaj UP. Każde wybranie pozycji (START) przełącza ją na kolejną wartość. Zmiany działają od razu w trwającym meczu i zostają na kolejne mecze.</p>
+    <dl>
+      <dt>Format</dt><dd>Klasyczny (sety i gemy) albo Americano (suma punktów).</dd>
+      <dt>Gem</dt><dd>Przewaga (gra na przewagi), Star point albo Golden point (przy 40-40 decyduje jeden punkt).</dd>
+      <dt>Set</dt><dd>Do 6 gemów albo do 4 gemów. Przy remisie w gemach (6-6 lub 4-4) gra się tie-break do 7.</dd>
+      <dt>Decydujący set</dt><dd>Pełny set (domyślnie), tie-break do 7 albo tie-break do 10 zamiast trzeciego seta.</dd>
+      <dt>Americano do</dt><dd>16, 21 (domyślnie), 24 albo 32 punkty.</dd>
+    </dl>
+    <p>Mecz klasyczny gra się zawsze do dwóch wygranych setów.</p>
+  </section>
+
+  <section>
+    <h2>Podsumowanie i historia</h2>
+    <div class="gallery">
+      <figure><div id="summary"></div><figcaption>Podsumowanie po „Zapisz”</figcaption></figure>
+      <figure><div id="history"></div><figcaption>Menu pauzy → Historia</figcaption></figure>
+    </div>
+    <ul>
+      <li>Rzymskie cyfry I, II, III to numery setów, a liczby pod nimi to gemy w secie. W Americano zamiast numeru jest <b>PKT</b>.</li>
+      <li>Podsumowanie pokazuje datę, wynik, czas meczu i sumę wygranych punktów (my : oni). Po „Zapisz” dowolny przycisk zamyka aplikację.</li>
+      <li>W historii START otwiera podsumowanie wybranego meczu, a dowolny przycisk wraca do listy.</li>
+      <li>Do historii trafia mecz przy „Nowy mecz” i „Zapisz”. Mecz bez punktów nie trafia.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Co zostaje w aktywności</h2>
+    <ul>
+      <li>Typ aktywności: padel (sporty rakietowe), z tętnem.</li>
+      <li>Jedno okrążenie na set, plus jedno na każdy mecz przy „Nowy mecz”.</li>
+      <li>Pola z wynikiem: wynik końcowy (np. „6-4 3-6 7-5”), sety i punkty obu drużyn, gemy i punkty w każdym okrążeniu, wykres różnicy punktów.</li>
+    </ul>
+    <div class="callout">
+      <h3>Wersja instalowana z pliku</h3>
+      <p>Garmin Connect pokazuje pola z wynikiem tylko dla aplikacji ze sklepu Connect IQ. Przy aplikacji wgranej plikiem <code>.prg</code> do <code>GARMIN/APPS</code> wynik jest w pliku FIT aktywności, ale nie zobaczysz go w Garmin Connect.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Dobrze wiedzieć</h2>
+    <ul>
+      <li>Jeśli aplikacja się zamknie w trakcie gry, po ponownym otwarciu wraca bieżący mecz. Nagrywanie zaczyna się wtedy od nowa, a czas meczu liczy się od tej chwili.</li>
+      <li>Cofnięcie punktu, który zamknął seta, przywraca wynik, ale okrążenie dodane po secie zostaje w aktywności.</li>
+      <li>Przesunięcie palcem po ekranie zegarek zamienia na UP lub DOWN. Pewniej jest używać przycisków.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+// Watch model: case, bezel, five buttons; screen content drawn in 454x454 device pixels like the app's Dc.
+const W = 454;
+const FONT = { xtiny: 27, small: 36, medium: 46, large: 64, number: 96 };
+const COL = { white: "#ffffff", lt: "#aaaaaa", dk: "#555555", yellow: "#ffea00" };
+const BUTTONS = { light: 150, up: 180, down: 210, start: 30, back: 330 };
+
+function t(x, y, size, color, s, opts = {}) {
+  const anchor = opts.anchor || "middle";
+  const weight = opts.weight || 600;
+  return `<text x="${x}" y="${y}" font-size="${size}" fill="${color}" text-anchor="${anchor}" dominant-baseline="central" font-weight="${weight}">${s}</text>`;
+}
+
+function button(angle, hot) {
+  const r = 268, a = angle * Math.PI / 180;
+  const x = r * Math.cos(a), y = -r * Math.sin(a);
+  return `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${-angle})">
+    <rect x="-14" y="-30" width="34" height="60" rx="8" fill="${hot ? "var(--btn-hot)" : "var(--btn)"}" stroke="var(--case)" stroke-width="3"/>
+  </g>`;
+}
+
+function watchBody(screen, hot = []) {
+  let ticks = "";
+  for (let i = 0; i < 60; i++) {
+    const a = i * 6 * Math.PI / 180, long = i % 5 === 0;
+    const r1 = 236, r2 = long ? 252 : 246;
+    ticks += `<line x1="${(r1 * Math.cos(a)).toFixed(1)}" y1="${(r1 * Math.sin(a)).toFixed(1)}" x2="${(r2 * Math.cos(a)).toFixed(1)}" y2="${(r2 * Math.sin(a)).toFixed(1)}" stroke="#8a929d" stroke-width="${long ? 3 : 1.5}"/>`;
+  }
+  const btns = Object.entries(BUTTONS).map(([k, a]) => button(a, hot.includes(k))).join("");
+  return `<rect x="-120" y="-330" width="240" height="120" rx="30" fill="var(--case)"/>
+    <rect x="-120" y="210" width="240" height="120" rx="30" fill="var(--case)"/>
+    ${btns}
+    <circle r="262" fill="var(--case)"/>
+    <circle r="258" fill="none" stroke="var(--case-hi)" stroke-width="4"/>
+    <circle r="230" fill="#000"/>
+    ${ticks}
+    <clipPath id="clip-${uid}"><circle r="227"/></clipPath>
+    <g clip-path="url(#clip-${uid++})"><g transform="translate(-227 -227)">${screen}</g></g>`;
+}
+let uid = 0;
+
+function watch(screen, hot = [], label = "") {
+  return `<svg viewBox="-320 -340 640 680" role="img" aria-label="${label}">${watchBody(screen, hot)}</svg>`;
+}
+
+// Screens, positions as in ScoreView.mc / SummaryView.mc (fractions of the screen height)
+function scoreScreen({ clock, sets, us, them, hr, status, americano }) {
+  const c = W / 2;
+  let s = `<rect width="${W}" height="${W}" fill="#000"/>`;
+  s += `<line x1="${W * .1}" y1="${c}" x2="${W * .9}" y2="${c}" stroke="${COL.dk}" stroke-width="2"/>`;
+  s += t(c, W * .10, FONT.xtiny, COL.white, clock);
+  s += t(c, W * .19, FONT.xtiny, COL.lt, sets);
+  [[us, "MY", .33], [them, "ONI", .67]].forEach(([team, name, fy]) => {
+    const y = W * fy;
+    s += t(W * .2, y, FONT.small, COL.lt, name);
+    if (americano) {
+      s += t(W * .6, y, FONT.number, COL.white, team.points);
+    } else {
+      s += t(W * .45, y, FONT.medium, COL.white, team.games);
+      s += t(W * .72, y, FONT.large, COL.white, team.points);
+    }
+  });
+  s += t(c, W * .80, FONT.xtiny, COL.lt, hr);
+  s += t(c, W * .88, FONT.xtiny, COL.yellow, status);
+  return s;
+}
+
+function menuScreen(title, items, sel) {
+  const c = W / 2;
+  let s = `<rect width="${W}" height="${W}" fill="#000"/>`;
+  s += t(c, 62, FONT.xtiny, COL.lt, title);
+  s += `<line x1="70" y1="92" x2="${W - 70}" y2="92" stroke="${COL.dk}" stroke-width="2"/>`;
+  items.forEach((it, i) => {
+    const d = i - sel;
+    const y = c + d * 92;
+    if (y < 110 || y > W - 30) return;
+    const label = Array.isArray(it) ? it[0] : it, sub = Array.isArray(it) ? it[1] : null;
+    if (d === 0) {
+      s += `<rect x="20" y="${y - 44}" width="${W - 40}" height="88" fill="#1e2a38"/>`;
+      s += t(c, sub ? y - 14 : y, FONT.medium - 6, COL.white, label);
+      if (sub) s += t(c, y + 22, FONT.xtiny - 3, COL.lt, sub);
+    } else {
+      s += t(c, sub ? y - 12 : y, FONT.small - 4, Math.abs(d) > 1 ? COL.dk : COL.lt, label);
+      if (sub) s += t(c, y + 18, FONT.xtiny - 5, COL.dk, sub);
+    }
+  });
+  return s;
+}
+
+function confirmScreen(lines) {
+  const c = W / 2;
+  let s = `<rect width="${W}" height="${W}" fill="#000"/>`;
+  lines.forEach((l, i) => { s += t(c, c - 22 + i * 44, FONT.small, COL.white, l); });
+  // check next to START (upper right), cross next to BACK (lower right)
+  s += `<path d="M352 118 l14 14 l26 -30" stroke="#3fbf5f" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+  s += `<path d="M358 318 l28 28 M386 318 l-28 28" stroke="#e0483e" stroke-width="8" stroke-linecap="round"/>`;
+  return s;
+}
+
+function summaryScreen() {
+  const c = W / 2;
+  let s = `<rect width="${W}" height="${W}" fill="#000"/>`;
+  s += t(c, W * .17, FONT.xtiny, COL.lt, "15.10 22:31");
+  const sets = ["6-4", "3-6", "7-5"], heads = ["I", "II", "III"];
+  sets.forEach((v, i) => {
+    const x = W * (i + 1) / (sets.length + 1);
+    s += t(x, W * .30, FONT.xtiny, COL.lt, heads[i]);
+    s += t(x, W * .41, FONT.medium, COL.white, v);
+  });
+  s += t(c, W * .63, FONT.small, COL.white, "Czas 1:12:30");
+  s += t(c, W * .77, FONT.small, COL.lt, "Punkty 68 : 54");
+  return s;
+}
+
+const score = scoreScreen({
+  clock: "21:14", sets: "6-4", hr: "152  0:47:05", status: "GOLDEN POINT",
+  us: { games: "3", points: "40" }, them: { games: "3", points: "40" }
+});
+
+// Hero: the score screen with labelled lines to every button
+(function hero() {
+  const callouts = [
+    ["light", "LIGHT", "podświetlenie", "left"],
+    ["up", "UP", "punkt dla nas · przytrzymaj: ustawienia", "left"],
+    ["down", "DOWN", "punkt dla nich", "left"],
+    ["start", "START", "menu pauzy", "right"],
+    ["back", "BACK", "cofnij punkt", "right"],
+  ];
+  let lines = "";
+  callouts.forEach(([key, name, desc, side]) => {
+    const a = BUTTONS[key] * Math.PI / 180;
+    const bx = 300 * Math.cos(a), by = -300 * Math.sin(a);
+    const ex = side === "left" ? -380 : 380;
+    const tx = side === "left" ? -392 : 392;
+    const anchor = side === "left" ? "end" : "start";
+    lines += `<path class="lead-line" d="M${bx.toFixed(1)} ${by.toFixed(1)} L${ex} ${by.toFixed(1)}"/>`;
+    lines += `<circle cx="${bx.toFixed(1)}" cy="${by.toFixed(1)}" r="6" fill="var(--btn-hot)"/>`;
+    lines += `<text class="lbl" x="${tx}" y="${(by - 12).toFixed(1)}" text-anchor="${anchor}" font-size="34" font-weight="700">${name}</text>`;
+    lines += `<text class="lbl-sub" x="${tx}" y="${(by + 22).toFixed(1)}" text-anchor="${anchor}" font-size="24">${desc}</text>`;
+  });
+  document.getElementById("hero").innerHTML =
+    `<svg viewBox="-860 -340 1720 680" role="img" aria-label="Zegarek z opisem przycisków">${watchBody(score, Object.keys(BUTTONS))}${lines}</svg>`;
+})();
+
+document.getElementById("score").innerHTML = watch(score, ["up", "down", "back"], "Ekran wyniku");
+document.getElementById("americano").innerHTML = watch(scoreScreen({
+  clock: "19:42", sets: "", hr: "138  0:14:51", status: "", americano: true,
+  us: { points: "14" }, them: { points: "11" }
+}), ["up", "down"], "Ekran wyniku w Americano");
+document.getElementById("pause").innerHTML = watch(menuScreen("Pauza",
+  ["Wznów", "Nowy mecz", "Zapisz", "Odrzuć", "Historia"], 0), ["up", "down", "start", "back"], "Menu pauzy");
+document.getElementById("confirm").innerHTML = watch(confirmScreen(["Zakończyć mecz", "i zacząć nowy?"]), ["start", "back"], "Potwierdzenie");
+document.getElementById("settings").innerHTML = watch(menuScreen("Ustawienia",
+  [["Format", "Klasyczny"], ["Gem", "Przewaga"], ["Set", "Do 6 gemów"], ["Decydujący set", "Pełny set"], ["Americano do", "21"]], 0),
+  ["up", "down", "start"], "Ustawienia");
+document.getElementById("summary").innerHTML = watch(summaryScreen(), Object.keys(BUTTONS), "Podsumowanie meczu");
+document.getElementById("history").innerHTML = watch(menuScreen("Historia",
+  [["I 6-4  II 3-6  III 7-5", "15.10 22:31  1:12:30"], ["PKT 21-15", "15.10 20:05  0:25:12"], ["I 6-2  II 6-3", "14.10 19:05  0:58:40"]], 0),
+  ["up", "down", "start"], "Historia meczów");
+</script>
