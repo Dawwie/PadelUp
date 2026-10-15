@@ -2,7 +2,7 @@
 
 A Garmin Connect IQ watch app that keeps the score of a padel match with the watch buttons and records the match as a padel activity with heart rate.
 
-The app's interface is in Polish. A full user guide (in Polish) is in [`docs/instrukcja.html`](docs/instrukcja.html).
+The app's interface is in Polish. A full user guide (in Polish) is online at [dawwie.github.io/PadelUp](https://dawwie.github.io/PadelUp/) (source: [`docs/instrukcja.html`](docs/instrukcja.html)).
 
 ## Features
 
