@@ -18,6 +18,7 @@ class PadelApp extends Application.AppBase {
     function getInitialView() as [WatchUi.Views] or [WatchUi.Views, WatchUi.InputDelegates] {
         var history = Application.Storage.getValue(HISTORY_KEY) as Array<Number>?;
         var match = new MatchScore.Match(MatchScore.configFromDictionary(Application.Storage.getValue(CONFIG_KEY) as Dictionary<String, Number>?), history);
-        return [new ScoreView(match), new ScoreDelegate(match, new Recorder(match))];
+        var recorder = new Recorder(match);
+        return [new ScoreView(match, recorder), new ScoreDelegate(match, recorder)];
     }
 }

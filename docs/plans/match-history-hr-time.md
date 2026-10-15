@@ -16,7 +16,7 @@
 2. ~~Czas meczu w `Recorder`~~: **zrobione**. `_matchStart` ustawiany po `_session.start()` i na początku `newMatch`; `matchDuration()` zwraca sekundy. Build na oba zegarki i testy 30/30 zielone. Wartości jeszcze nikt nie wyświetla, sprawdzenie w symulatorze razem z krokiem 3. Uwaga: `matchDuration()` czytać **przed** `_recorder.newMatch()`, bo ten zeruje start.
 3. ~~Zapis do historii~~: **zrobione**. `storeMatch(match, recorder)` w `ScoreDelegate.mc`, klucz `MATCHES_KEY = "matches"`, wołane w `NewMatchConfirmDelegate` (przed `_recorder.newMatch`) i przy `:save`. Test `historySurvivesStorage` (31/31). W symulatorze: Nowy mecz + Zapisz, restart, Zapisz: lista miała 2 mecze, najnowszy pierwszy.
 4. ~~Ekrany~~: **zrobione**. `source/SummaryView.mc`: podsumowanie po „Zapisz” (dowolny przycisk zamyka aplikację) i „Historia” jako ostatnia pozycja menu pauzy. Sety oznaczone numerami I / II / III nad wynikiem (wariant B z prototypu na gałęzi `prototype/set-labels`, commit 5231821), Americano „PKT”. Wpis historii zapisuje też `format`.
-5. **Tętno i czas na ekranie** według werdyktu powyżej. `ScoreView` przechodzi z odświeżania co minutę na co 1 s. Sprawdzić, czy linia nie koliduje ze statusem („TIE-BREAK DO 10”) ani z Americano.
+5. ~~Tętno i czas na ekranie~~: **zrobione** (czeka na sprawdzenie w symulatorze). `ScoreText.heartRateTimeText` + test, linia na `h * 0.80`, `ScoreView` dostaje `Recorder` i odświeża się co 1 s (timer powtarzalny).
 6. **Domknięcie:** CLAUDE.md (Behavior, Storage, Known limits), buildy release na oba zegarki, `/code-review`, test baterii w prawdziwym meczu.
 
 Testy: `monkeyc ... --unit-test` i `monkeydo ... -t` (polecenia w CLAUDE.md). Symulator musi być uruchomiony.

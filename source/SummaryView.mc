@@ -69,7 +69,7 @@ module SummaryText {
     function date(seconds as Number) as String {
         var info = Time.Gregorian.info(new Time.Moment(seconds), Time.FORMAT_SHORT);
         return info.day + "." + (info.month as Number).format("%02d") + " "
-            + ScoreText.clockText(info.hour, info.min, System.getDeviceSettings().is24Hour);
+            + ScoreText.clockText(info.hour, info.min);
     }
 
     // Entries stored before the format was saved count as classic

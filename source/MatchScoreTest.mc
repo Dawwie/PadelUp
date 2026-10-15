@@ -242,12 +242,9 @@ function setsTextListsFinishedSets(logger as Logger) as Boolean {
 }
 
 (:test)
-function clockTextFollows12And24HourSetting(logger as Logger) as Boolean {
-    Test.assertEqual(ScoreText.clockText(14, 5, true), "14:05");
-    Test.assertEqual(ScoreText.clockText(0, 30, true), "0:30");
-    Test.assertEqual(ScoreText.clockText(14, 5, false), "2:05");
-    Test.assertEqual(ScoreText.clockText(0, 30, false), "12:30");
-    Test.assertEqual(ScoreText.clockText(12, 0, false), "12:00");
+function clockTextIsAlways24Hour(logger as Logger) as Boolean {
+    Test.assertEqual(ScoreText.clockText(14, 5), "14:05");
+    Test.assertEqual(ScoreText.clockText(0, 30), "0:30");
     return true;
 }
 
@@ -427,9 +424,16 @@ function historySurvivesStorage(logger as Logger) as Boolean {
 }
 
 (:test)
-function durationTextShowsHoursOnlyWhenNeeded(logger as Logger) as Boolean {
-    Test.assertEqual(ScoreText.durationText(9), "0:09");
-    Test.assertEqual(ScoreText.durationText(2825), "47:05");
+function heartRateTimeTextShowsDashesWithoutHeartRate(logger as Logger) as Boolean {
+    Test.assertEqual(ScoreText.heartRateTimeText(142, 1421), "142  0:23:41");
+    Test.assertEqual(ScoreText.heartRateTimeText(null, 9), "--  0:00:09");
+    return true;
+}
+
+(:test)
+function durationTextAlwaysShowsHours(logger as Logger) as Boolean {
+    Test.assertEqual(ScoreText.durationText(9), "0:00:09");
+    Test.assertEqual(ScoreText.durationText(2825), "0:47:05");
     Test.assertEqual(ScoreText.durationText(4350), "1:12:30");
     return true;
 }
