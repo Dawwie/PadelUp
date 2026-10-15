@@ -1,7 +1,7 @@
 # Pomysły na nowe funkcje: co mają inne aplikacje i o co proszą użytkownicy
 
 Data: 2026-10-15
-Pytanie: jakie funkcje mają inne aplikacje do liczenia wyniku w padlu i tenisie na zegarki (Connect IQ, Apple Watch, Wear OS, natywny Garmin), czego najczęściej brakuje użytkownikom i co z tego warto i da się dodać do Padel Score?
+Pytanie: jakie funkcje mają inne aplikacje do liczenia wyniku w padlu i tenisie na zegarki (Connect IQ, Apple Watch, Wear OS, natywny Garmin), czego najczęściej brakuje użytkownikom i co z tego warto i da się dodać do PadelUp?
 
 > Źródła to materiały pierwotne: strony sklepów (apps.garmin.com, App Store, Google Play) i recenzje na nich, wątki na forum Garmina (forums.garmin.com), dokumentacja Connect IQ (developer.garmin.com) i definicje urządzeń z lokalnego SDK. Opisy i recenzje ze sklepu Connect IQ pobrałem z jego publicznego API JSON (`apps.garmin.com/api/appsLibraryExternalServices/api/asw/apps/<id>` oraz `.../<id>/reviews`), z którego korzysta strona sklepu. Stan na 2026-10-15. Recenzje cytuję w skrócie, z datą. Miejsca, których nie potwierdziłem, oznaczam **[NIEZWERYFIKOWANE]**.
 >
@@ -10,9 +10,9 @@ Pytanie: jakie funkcje mają inne aplikacje do liczenia wyniku w padlu i tenisie
 ## Podsumowanie
 
 - **Natywny Padel Garmina nie liczy wyniku.** Rejestruje czas, tętno i kalorie. To samo mówią użytkownicy i deweloperzy na forum ([app-ideas: Padel](https://forums.garmin.com/developer/connect-iq/f/app-ideas/274544/padel)). Na fēnix 8 Garmin usunął też dystans z profilu Padel, bo był niedokładny ([forum fēnix 8](https://forums.garmin.com/outdoor-recreation/outdoor-recreation/f/fenix-8-series/398275/padel-activity)). Nisza aplikacji do liczenia wyniku jest więc realna. W sklepie CIQ jest już kilkanaście aplikacji, z czego część została wydana w 2026.
-- **Standard rynku, którego Padel Score nie ma:** wskaźnik serwującego i strony serwisu, Silver Point, tętno i czas na ekranie, podsumowanie i historia meczów na zegarku, własne formaty (np. set do 9, best of 5, dowolny limit Americano).
+- **Standard rynku, którego PadelUp nie ma:** wskaźnik serwującego i strony serwisu, Silver Point, tętno i czas na ekranie, podsumowanie i historia meczów na zegarku, własne formaty (np. set do 9, best of 5, dowolny limit Americano).
 - **Najczęstsze skargi w recenzjach:** (1) wyniku nie widać w Garmin Connect, (2) zbyt małe cyfry, (3) brakujący wariant liczenia (Silver Point, set do 9, super tie-break, Americano), (4) przypadkowe dotknięcia i blokada ekranu dotykowego, (5) odwrotne przypisanie przycisków / brak trybu leworęcznego, (6) nieznany serwujący, (7) zużycie baterii.
-- **Najlepsze kandydatury dla Padel Score** (tanie i mocno udokumentowane): Silver Point, zamiana przycisków, większe cyfry, wskaźnik serwującego ze zmianą stron, tętno i czas meczu na ekranie, podsumowanie meczu na zegarku i własne formaty. Droższe wyróżniki: live scoreboard i zapowiedź głosowa przez telefon.
+- **Najlepsze kandydatury dla PadelUp** (tanie i mocno udokumentowane): Silver Point, zamiana przycisków, większe cyfry, wskaźnik serwującego ze zmianą stron, tętno i czas meczu na ekranie, podsumowanie meczu na zegarku i własne formaty. Droższe wyróżniki: live scoreboard i zapowiedź głosowa przez telefon.
 
 ---
 
@@ -89,7 +89,7 @@ Liczby w nawiasach oznaczają, ile niezależnych recenzji lub postów z powyższ
 | 13 | **GPS / dystans** (6, głównie tenis na zewnątrz) | „ability to track real-time GPS” (2025-06-25, Tennis Studio); „only tracked around 450m” (2026-04-15, Tennis Smash). Dla padla Garmin sam usunął dystans (sekcja 1c) |
 | 14 | **Zmiana stron i przerwy: wskazówki i odliczanie** (3) | „change ends screen stayed on for longer” (2026-08-09, Tennis Studio); „cronómetro cuenta atrás… en los cambios de lado y descanso” (2026-05-26, [Tennis AI](https://apps.garmin.com/apps/0073ddf4-3ec7-436d-a598-d88cfd0d583a)) |
 | 15 | **Tryb treningu / rozgrzewki bez wyniku** (4, tenis) | „A practice mode could be useful just to track step/distance/fc” (2021-07-16, [Tennis Tracker](https://apps.garmin.com/apps/6aa4f2e0-1892-47a6-9078-40e23ccaf56f)); „I wish there was a free play option” (2021-07-16, Tennis Tracker); „training mode” (2020-06-27, Tennis App) |
-| 16 | **Undo** (wiele, w starszych aplikacjach) | „You cannot delete the point once you have assigned it” (2025-12-28, Padel App); „sans possibilité de revenir en arrière… ça ne sert pas à grand chose” (2020-10-18, Tennis App). **Padel Score to już ma** (nielimitowane undo przez replay historii) |
+| 16 | **Undo** (wiele, w starszych aplikacjach) | „You cannot delete the point once you have assigned it” (2025-12-28, Padel App); „sans possibilité de revenir en arrière… ça ne sert pas à grand chose” (2020-10-18, Tennis App). **PadelUp to już ma** (nielimitowane undo przez replay historii) |
 | 17 | **Eksport statystyk, analiza punkt po punkcie** (3) | „export statistics… json” (2025-06-24, Tennis Studio); „score progression within each game” (2026-10-06, Tennis AI) |
 
 Wzorzec w odpowiedziach deweloperów: najlepiej oceniane aplikacje (Padel Go, Padel Smash, Padel Score/jsokol) zdobywają 5 gwiazdek tym, że **w kilka dni dodają brakujący wariant formatu**. Sam zakres formatów jest głównym polem konkurencji.
@@ -210,7 +210,7 @@ Ranking wynika z mojej oceny: (siła dowodu z sekcji 2) × (wartość na korcie)
 
 ---
 
-## 4. Co Padel Score już ma (dla porządku)
+## 4. Co PadelUp już ma (dla porządku)
 
 Te funkcje są w aplikacji i nie są kandydatami. Konkurencja i recenzje potwierdzają, że są oczekiwane:
 - Przewaga / Star point / Golden point, sety do 6 lub 4, TB, decydujący set jako TB7, TB10 lub pełny set; Americano z limitem.

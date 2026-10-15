@@ -1,4 +1,4 @@
-# Padel Score: Connect IQ watch app
+# PadelUp: Connect IQ watch app
 
 Watch app (Monkey C) that records a padel activity and keeps the match score, entered with the watch buttons.
 Background research and the original plan: `docs/research/garmin-padel-scoring.md`.
@@ -21,8 +21,8 @@ SDK="$HOME/Library/Application Support/Garmin/ConnectIQ/Sdks/connectiq-sdk-mac-9
 "$SDK/bin/monkeyc" -f monkey.jungle -d epix2pro47mm -y developer_key.der -o bin/padel.prg -l 2
 "$SDK/bin/monkeydo" bin/padel.prg epix2pro47mm
 # release builds: copy over USB (MTP, e.g. Android File Transfer) to GARMIN/APPS
-"$SDK/bin/monkeyc" -f monkey.jungle -d epix2pro47mm -y developer_key.der -o bin/PadelScore.prg -r
-"$SDK/bin/monkeyc" -f monkey.jungle -d fenix9pro51mm -y developer_key.der -o bin/PadelScore-fenix9pro51mm.prg -r
+"$SDK/bin/monkeyc" -f monkey.jungle -d epix2pro47mm -y developer_key.der -o bin/PadelUp.prg -r
+"$SDK/bin/monkeyc" -f monkey.jungle -d fenix9pro51mm -y developer_key.der -o bin/PadelUp-fenix9pro51mm.prg -r
 ```
 
 A new device needs its definition downloaded in the SDK Manager (Devices) first. Only send `.prg` files to testers: `*.debug.xml` contains local paths.

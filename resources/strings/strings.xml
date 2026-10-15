@@ -1,5 +1,5 @@
 <resources>
-    <string id="AppName">Padel Score</string>
+    <string id="AppName">PadelUp</string>
 
     <string id="MenuTitle">Pauza</string>
     <string id="MenuResume">Wznów</string>
