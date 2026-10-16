@@ -22,6 +22,8 @@ The app's interface is in Polish. A full user guide (in Polish) is online at [da
 
 ## Controls
 
+The app opens on a start screen (Start / Historia / Ustawienia). Recording starts with Start; BACK there closes the app without an activity.
+
 | Button | Action |
 |---|---|
 | UP | Point for us |

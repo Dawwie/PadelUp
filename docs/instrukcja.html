@@ -92,6 +92,21 @@ svg text { font-family: var(--screen); }
   </section>
 
   <section>
+    <h2>Ekran startowy</h2>
+    <div class="pair">
+      <div id="start"></div>
+      <div class="text">
+        <p>Aplikacja otwiera się na ekranie startowym. Nic się jeszcze nie nagrywa. UP i DOWN przewijają, START wybiera, BACK zamyka aplikację.</p>
+        <dl>
+          <dt>Start</dt><dd>Rozpoczyna aktywność i mecz. Pod spodem widać aktualny format.</dd>
+          <dt>Historia</dt><dd>Ostatnie 20 meczów. Pod spodem widać wynik ostatniego.</dd>
+          <dt>Ustawienia</dt><dd>Te same co w trakcie meczu (przytrzymanie UP).</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <h2>Sterowanie</h2>
     <div class="keys">
       <div class="key"><span class="chip">UP</span><span>Punkt dla nas (górna połowa ekranu, <b>MY</b>).</span></div>
@@ -101,7 +116,7 @@ svg text { font-family: var(--screen); }
       <div class="key"><span class="chip hold">UP ⟶ przytrzymaj</span><span>Ustawienia meczu.</span></div>
       <div class="key"><span class="chip">LIGHT</span><span>Podświetlenie, jak w każdej aplikacji. PadelUp go nie używa.</span></div>
     </div>
-    <p>Każdy punkt to krótka wibracja. Punkt, który kończy seta albo mecz, daje długą wibrację. Nagrywanie aktywności startuje od razu po otwarciu aplikacji.</p>
+    <p>Każdy punkt to krótka wibracja. Punkt, który kończy seta albo mecz, daje długą wibrację. Nagrywanie aktywności startuje po wybraniu Start na ekranie startowym.</p>
   </section>
 
   <section>
@@ -195,7 +210,7 @@ svg text { font-family: var(--screen); }
   <section>
     <h2>Dobrze wiedzieć</h2>
     <ul>
-      <li>Jeśli aplikacja się zamknie w trakcie gry, po ponownym otwarciu wraca bieżący mecz. Nagrywanie zaczyna się wtedy od nowa, a czas meczu liczy się od tej chwili.</li>
+      <li>Jeśli aplikacja się zamknie w trakcie gry, po ponownym otwarciu wraca od razu bieżący mecz, bez ekranu startowego. Nagrywanie zaczyna się wtedy od nowa, a czas meczu liczy się od tej chwili.</li>
       <li>Cofnięcie punktu, który zamknął seta, przywraca wynik, ale okrążenie dodane po secie zostaje w aktywności.</li>
       <li>Przesunięcie palcem po ekranie zegarek zamienia na UP lub DOWN. Pewniej jest używać przycisków.</li>
     </ul>
@@ -350,6 +365,9 @@ document.getElementById("americano").innerHTML = watch(scoreScreen({
   clock: "19:42", sets: "", status: "", americano: true,
   us: { points: "14" }, them: { points: "11" }
 }), ["up", "down"], "Ekran wyniku w Americano");
+document.getElementById("start").innerHTML = watch(menuScreen("PadelUp",
+  [["Start", "Klasyczny · Golden point"], ["Historia", "Ostatni: I 6-4  II 3-6  III 7-5"], ["Ustawienia", ""]], 0),
+  ["up", "down", "start", "back"], "Ekran startowy");
 document.getElementById("pause").innerHTML = watch(menuScreen("Pauza",
   ["Wznów", "Nowy mecz", "Zapisz", "Odrzuć", "Historia"], 0), ["up", "down", "start", "back"], "Menu pauzy");
 document.getElementById("confirm").innerHTML = watch(confirmScreen(["Zakończyć mecz", "i zacząć nowy?"]), ["start", "back"], "Potwierdzenie");

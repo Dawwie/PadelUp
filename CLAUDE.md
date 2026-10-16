@@ -34,12 +34,13 @@ The agent cannot screenshot or click the simulator; the user checks the UI by cl
 - `source/MatchScore.mc`: pure scoring logic. Classic FIP (advantage / star point / golden point, sets to 6 or 4 games, tie-break, deciding set as a full set or a tie-break to 7/10) and Americano/Mexicano to a point total. `Match(config, history)` keeps the list of points; undo, config changes and restore all replay that list.
 - `source/MatchScoreTest.mc`: unit tests (`Toybox.Test`) for the scoring, `ScoreText` (incl. clock and match time format), match history, config storage and `Settings.nextValue`.
 - `source/ScoreView.mc`: score screen (24-hour clock at the top, us on top, them on the bottom; redrawn at the start of each minute and after every change) and `ScoreText` (clock, match time, sets, status line, `finalScore` for FIT).
+- `source/StartMenu.mc`: start screen (Menu2: Start / Historia / Ustawienia, sublabels: format and last match, refreshed in `onShow`). Start creates the `Recorder` and switches to the score screen.
 - `source/ScoreDelegate.mc`: buttons, pause menu, confirmations, vibration; `storeMatch` adds the match to the history.
 - `source/MatchHistory.mc`: pure history logic: `add` (newest first, last 20, no 0:0 matches), splitting the score into sets, list labels.
 - `source/SummaryView.mc`: match summary screen and the Historia list.
 - `source/Settings.mc`: settings menu; each select cycles the item to its next value.
 - `source/Recorder.mc`: activity session (RACKET / PADEL, heart rate), FIT developer fields and the match time (`matchDuration`, timer time since the match started, without pauses). Field ids must match `resources/fit/fit_contributions.xml`.
-- `source/PadelApp.mc`: restores config and history from storage, creates the match, recorder and view.
+- `source/PadelApp.mc`: restores config and history from storage, creates the match; opens the start screen, or the score screen with a recorder when an unfinished match was restored.
 
 ## Behavior
 
@@ -49,7 +50,7 @@ The agent cannot screenshot or click the simulator; the user checks the UI by cl
 - Zapisz shows the match summary (date, set scores numbered I / II / III or "PKT" in Americano, match time, points); any button closes the app. A match without points closes the app at once.
 - Historia: the last 20 finished matches (set scores, date, match time); select opens the same summary, any button goes back to the list.
 - Nowy mecz: score back to zero in the same session (for Americano tournaments), the finished match stays in the laps and the session summary.
-- Recording starts when the app opens.
+- The app opens on the start screen: Start / Historia / Ustawienia; BACK there closes the app. Recording starts with Start (no activity before). After a crash with an unfinished match, it opens straight on the score screen.
 - Vibration: short per point, long when the point ends a set or the match.
 - Settings: format (Klasyczny / Americano), game (Przewaga / Star point / Golden point), set (6 / 4 games), deciding set (full set by default / tie-break to 7 / tie-break to 10), Americano total (16 / 21 / 24 / 32, default 21). Sets to win is fixed at 2. Changes apply to the match in progress and are kept for the next matches.
 

@@ -4,6 +4,7 @@ import Toybox.WatchUi;
 
 // Match settings (long UP). Selecting an item switches it to the next value; the sublabel shows the current one.
 // Changes apply to the match in progress and are kept in storage for the next matches.
+// Opened from the start screen too, before recording, with no recorder.
 module Settings {
 
     const FORMATS = [MatchScore.FORMAT_CLASSIC, MatchScore.FORMAT_AMERICANO] as Array<Number>;
@@ -17,7 +18,7 @@ module Settings {
         return values[(values.indexOf(current) + 1) % values.size()];
     }
 
-    function open(match as MatchScore.Match, recorder as Recorder) as Void {
+    function open(match as MatchScore.Match, recorder as Recorder?) as Void {
         var config = match.getConfig();
         var menu = new WatchUi.Menu2({:title => text(Rez.Strings.SettingsTitle)});
         var ids = [:format, :gameMode, :gamesPerSet, :decider, :americanoTotal];
@@ -46,6 +47,12 @@ module Settings {
         return config.americanoTotal.toString();
     }
 
+    // "Klasyczny · Golden point" or "Americano · 21"
+    function summary(config as MatchScore.MatchConfig) as String {
+        var second = config.format == MatchScore.FORMAT_CLASSIC ? :gameMode : :americanoTotal;
+        return valueLabel(config, :format) + " · " + valueLabel(config, second);
+    }
+
     function text(id as ResourceId) as String {
         return WatchUi.loadResource(id) as String;
     }
@@ -53,9 +60,9 @@ module Settings {
 
 class SettingsDelegate extends WatchUi.Menu2InputDelegate {
     private var _match as MatchScore.Match;
-    private var _recorder as Recorder;
+    private var _recorder as Recorder?;
 
-    function initialize(match as MatchScore.Match, recorder as Recorder) {
+    function initialize(match as MatchScore.Match, recorder as Recorder?) {
         Menu2InputDelegate.initialize();
         _match = match;
         _recorder = recorder;
@@ -78,7 +85,9 @@ class SettingsDelegate extends WatchUi.Menu2InputDelegate {
         item.setSubLabel(Settings.valueLabel(config, id));
         _match.configChanged();
         Application.Storage.setValue(CONFIG_KEY, config.toDictionary());
-        _recorder.update(_match);
+        if (_recorder != null) {
+            _recorder.update(_match);
+        }
     }
 
     function onBack() as Void {

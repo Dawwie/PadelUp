@@ -1,6 +1,9 @@
 <resources>
     <string id="AppName">PadelUp</string>
 
+    <string id="MenuStart">Start</string>
+    <string id="StartLastMatch">Ostatni:</string>
+
     <string id="MenuTitle">Pauza</string>
     <string id="MenuResume">Wznów</string>
     <string id="MenuNewMatch">Nowy mecz</string>
