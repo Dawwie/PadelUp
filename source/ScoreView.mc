@@ -56,7 +56,7 @@ class ScoreView extends WatchUi.View {
 
         var clock = System.getClockTime();
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(w / 2, h * 0.10, Graphics.FONT_XTINY,
+        dc.drawText(w / 2, h * 0.10, Graphics.FONT_TINY,
             ScoreText.clockText(clock.hour, clock.min), center);
 
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
