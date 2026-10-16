@@ -1,21 +1,17 @@
-import Toybox.Activity;
 import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.System;
 import Toybox.Timer;
 import Toybox.WatchUi;
 
-// Us on the top half (UP button), them on the bottom half (DOWN button), the clock above the sets,
-// heart rate and match time above the status line.
+// Us on the top half (UP button), them on the bottom half (DOWN button), the clock above the sets.
 class ScoreView extends WatchUi.View {
     private var _match as MatchScore.Match;
-    private var _recorder as Recorder;
     private var _timer as Timer.Timer?;
 
-    function initialize(match as MatchScore.Match, recorder as Recorder) {
+    function initialize(match as MatchScore.Match) {
         View.initialize();
         _match = match;
-        _recorder = recorder;
     }
 
     function onShow() as Void {
@@ -30,14 +26,15 @@ class ScoreView extends WatchUi.View {
         }
     }
 
-    // Redraw every second for the heart rate and the match time
+    // Redraw at the start of each minute for the clock
     function onTick() as Void {
         WatchUi.requestUpdate();
+        scheduleTick();
     }
 
     private function scheduleTick() as Void {
         if (_timer != null) {
-            _timer.start(method(:onTick), 1000, true);
+            _timer.start(method(:onTick), (60 - System.getClockTime().sec) * 1000, false);
         }
     }
 
@@ -64,11 +61,6 @@ class ScoreView extends WatchUi.View {
 
         dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
         dc.drawText(w / 2, h * 0.19, Graphics.FONT_XTINY, ScoreText.setsText(state), center);
-
-        var info = Activity.getActivityInfo();
-        dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_TRANSPARENT);
-        dc.drawText(w / 2, h * 0.80, Graphics.FONT_XTINY,
-            ScoreText.heartRateTimeText(info != null ? info.currentHeartRate : null, _recorder.matchDuration()), center);
 
         dc.setColor(Graphics.COLOR_YELLOW, Graphics.COLOR_TRANSPARENT);
         dc.drawText(w / 2, h * 0.88, Graphics.FONT_XTINY, ScoreText.statusText(config, state), center);
@@ -105,11 +97,6 @@ module ScoreText {
     // Match time with hours, so it does not look like the clock: "0:47:05"
     function durationText(seconds as Number) as String {
         return seconds / 3600 + ":" + (seconds / 60 % 60).format("%02d") + ":" + (seconds % 60).format("%02d");
-    }
-
-    // "142  0:23:41": heart rate ("--" without a reading) and match time
-    function heartRateTimeText(heartRate as Number?, seconds as Number) as String {
-        return (heartRate != null ? heartRate.toString() : "--") + "  " + durationText(seconds);
     }
 
     // Finished sets, e.g. "6-4  3-6"

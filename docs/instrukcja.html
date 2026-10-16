@@ -114,7 +114,6 @@ svg text { font-family: var(--screen); }
           <dt>6-4</dt><dd>Wyniki zakończonych setów.</dd>
           <dt>MY 3 40</dt><dd>Nasze gemy w secie i punkty w gemie (0, 15, 30, 40, AD). W tie-breaku punkty liczą się 1, 2, 3…</dd>
           <dt>ONI 3 40</dt><dd>To samo dla rywali.</dd>
-          <dt>152&nbsp;&nbsp;0:47:05</dt><dd>Tętno i czas meczu (godziny:minuty:sekundy, bez pauz). Bez odczytu tętna pokazuje „--”. Czas liczy się od nowa po „Nowy mecz”.</dd>
           <dt>Linia statusu</dt><dd>Żółty napis, gdy coś jest ważne: <span class="status">GOLDEN POINT</span>, <span class="status">STAR POINT</span>, <span class="status">TIE-BREAK DO 7</span>, <span class="status">WYGRANA: MY</span>.</dd>
         </dl>
       </div>
@@ -249,7 +248,7 @@ function watch(screen, hot = [], label = "") {
 }
 
 // Screens, positions as in ScoreView.mc / SummaryView.mc (fractions of the screen height)
-function scoreScreen({ clock, sets, us, them, hr, status, americano }) {
+function scoreScreen({ clock, sets, us, them, status, americano }) {
   const c = W / 2;
   let s = `<rect width="${W}" height="${W}" fill="#000"/>`;
   s += `<line x1="${W * .1}" y1="${c}" x2="${W * .9}" y2="${c}" stroke="${COL.dk}" stroke-width="2"/>`;
@@ -265,7 +264,6 @@ function scoreScreen({ clock, sets, us, them, hr, status, americano }) {
       s += t(W * .72, y, FONT.large, COL.white, team.points);
     }
   });
-  s += t(c, W * .80, FONT.xtiny, COL.lt, hr);
   s += t(c, W * .88, FONT.xtiny, COL.yellow, status);
   return s;
 }
@@ -318,7 +316,7 @@ function summaryScreen() {
 }
 
 const score = scoreScreen({
-  clock: "21:14", sets: "6-4", hr: "152  0:47:05", status: "GOLDEN POINT",
+  clock: "21:14", sets: "6-4", status: "GOLDEN POINT",
   us: { games: "3", points: "40" }, them: { games: "3", points: "40" }
 });
 
@@ -349,7 +347,7 @@ const score = scoreScreen({
 
 document.getElementById("score").innerHTML = watch(score, ["up", "down", "back"], "Ekran wyniku");
 document.getElementById("americano").innerHTML = watch(scoreScreen({
-  clock: "19:42", sets: "", hr: "138  0:14:51", status: "", americano: true,
+  clock: "19:42", sets: "", status: "", americano: true,
   us: { points: "14" }, them: { points: "11" }
 }), ["up", "down"], "Ekran wyniku w Americano");
 document.getElementById("pause").innerHTML = watch(menuScreen("Pauza",

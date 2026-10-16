@@ -451,13 +451,6 @@ function historySurvivesStorage(logger as Logger) as Boolean {
 }
 
 (:test)
-function heartRateTimeTextShowsDashesWithoutHeartRate(logger as Logger) as Boolean {
-    Test.assertEqual(ScoreText.heartRateTimeText(142, 1421), "142  0:23:41");
-    Test.assertEqual(ScoreText.heartRateTimeText(null, 9), "--  0:00:09");
-    return true;
-}
-
-(:test)
 function durationTextAlwaysShowsHours(logger as Logger) as Boolean {
     Test.assertEqual(ScoreText.durationText(9), "0:00:09");
     Test.assertEqual(ScoreText.durationText(2825), "0:47:05");

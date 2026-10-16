@@ -33,7 +33,7 @@ The agent cannot screenshot or click the simulator; the user checks the UI by cl
 
 - `source/MatchScore.mc`: pure scoring logic. Classic FIP (advantage / star point / golden point, sets to 6 or 4 games, tie-break, deciding set as a full set or a tie-break to 7/10) and Americano/Mexicano to a point total. `Match(config, history)` keeps the list of points; undo, config changes and restore all replay that list.
 - `source/MatchScoreTest.mc`: unit tests (`Toybox.Test`) for the scoring, `ScoreText` (incl. clock and match time format), match history, config storage and `Settings.nextValue`.
-- `source/ScoreView.mc`: score screen (24-hour clock at the top, us on top, them on the bottom, heart rate and match time above the status line; redrawn every second) and `ScoreText` (clock, match time, sets, status line, `finalScore` for FIT).
+- `source/ScoreView.mc`: score screen (24-hour clock at the top, us on top, them on the bottom; redrawn at the start of each minute and after every change) and `ScoreText` (clock, match time, sets, status line, `finalScore` for FIT).
 - `source/ScoreDelegate.mc`: buttons, pause menu, confirmations, vibration; `storeMatch` adds the match to the history.
 - `source/MatchHistory.mc`: pure history logic: `add` (newest first, last 20, no 0:0 matches), splitting the score into sets, list labels.
 - `source/SummaryView.mc`: match summary screen and the Historia list.
@@ -66,4 +66,4 @@ The agent cannot screenshot or click the simulator; the user checks the UI by cl
 - After a crash only the current match is restored, and recording starts anew (earlier matches of the session are lost). The match time then counts from the restore.
 - A new default setting applies only on a watch without a stored `config`: the whole config is stored on any settings change.
 - Touch is not handled explicitly; the system maps swipes to UP/DOWN (swipe direction on the watch not verified).
-- Not yet tested on a real watch: button lock during the activity, vibration, the activity type in Garmin Connect, the per-second redraw (battery, dimmed screen).
+- Not yet tested on a real watch: button lock during the activity, vibration, the activity type in Garmin Connect, the dimmed screen during the activity.

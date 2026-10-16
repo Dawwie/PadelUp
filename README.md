@@ -9,7 +9,7 @@ The app's interface is in Polish. A full user guide (in Polish) is online at [da
 - **Classic FIP scoring**: advantage, star point or golden point; sets to 6 or 4 games with a tie-break; deciding set as a full set or a tie-break to 7 or 10.
 - **Americano / Mexicano**: points to a total of 16, 21, 24 or 32.
 - **Unlimited undo**: every point is stored, and undo replays the match.
-- **Score screen**: clock, heart rate and match time (without pauses).
+- **Score screen**: clock, set scores, games and points.
 - **Several matches per session** (for Americano tournaments) with **New match**. Each match gets its own lap.
 - **Match summary and history**: set scores, date and match time of the last 20 matches.
 - **Vibration**: short for every point, long when a set or the match ends.

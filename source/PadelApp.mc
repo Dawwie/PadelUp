@@ -19,6 +19,6 @@ class PadelApp extends Application.AppBase {
         var history = Application.Storage.getValue(HISTORY_KEY) as Array<Number>?;
         var match = new MatchScore.Match(MatchScore.configFromDictionary(Application.Storage.getValue(CONFIG_KEY) as Dictionary<String, Number>?), history);
         var recorder = new Recorder(match);
-        return [new ScoreView(match, recorder), new ScoreDelegate(match, recorder)];
+        return [new ScoreView(match), new ScoreDelegate(match, recorder)];
     }
 }
