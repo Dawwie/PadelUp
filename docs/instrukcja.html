@@ -3,6 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PadelUp – instrukcja</title>
+<link rel="icon" href="logo.png">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&family=Barlow+Semi+Condensed:wght@500;600&display=swap">
 <style>
@@ -48,6 +49,8 @@ h3 { font-size: 22px; }
 p { margin: 0; max-width: 65ch; }
 .eyebrow { font-family: var(--display); text-transform: uppercase; letter-spacing: .12em; color: var(--court); font-size: 15px; }
 header { display: grid; gap: 12px; }
+header h1 { display: flex; align-items: center; gap: .25em; }
+header .logo { height: 1.1em; width: auto; }
 header .lead { font-size: 19px; color: var(--muted); }
 .hero svg { width: 100%; height: auto; display: block; }
 .note { font-size: 14px; color: var(--muted); }
@@ -82,7 +85,7 @@ svg text { font-family: var(--screen); }
 <div class="wrap">
   <header>
     <span class="eyebrow">Aplikacja na zegarek Garmin · epix Pro / fēnix 9 Pro</span>
-    <h1>PadelUp</h1>
+    <h1>PadelUp <img class="logo" src="logo.png" alt=""></h1>
     <p class="lead">Liczy wynik meczu padla przyciskami zegarka i nagrywa aktywność z tętnem. Wynik meczu, sety i przebieg punktów trafiają do zapisanej aktywności.</p>
   </header>
 

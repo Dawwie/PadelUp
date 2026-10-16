@@ -1,3 +1,5 @@
+<img src="docs/logo.png" alt="PadelUp logo" width="160">
+
 # PadelUp
 
 A Garmin Connect IQ watch app that keeps the score of a padel match with the watch buttons and records the match as a padel activity with heart rate.
